@@ -1,0 +1,10 @@
+# Logs & temporary files
+*.log
+*.tmp
+*~
+
+# Backups
+*.bak*
+
+# Cache
+.cache/
