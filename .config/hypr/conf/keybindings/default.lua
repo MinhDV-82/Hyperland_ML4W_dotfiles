@@ -129,6 +129,8 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/loadc
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-wallpaper-app --random"), { description = "Random Wallpaper" })
 hl.bind(mainMod .. " + CTRL + W", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-wallpaper-app"), { description = "Wallpaper Selector" })
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-theme"), { description = "Toggle Dark/Light Mode" })
+-- Lọc ánh sáng xanh (Night Light): Super + Shift + N
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-nightlight.sh"), { description = "Toggle Night Light (Filter Blue Light)" })
 hl.bind(mainMod .. " + CTRL + B", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-statusbar"), { description = "Toggle Status Bar" })
 hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd("ml4w-powermenu toggle"), { description = "Power Menu" })
 -- Logout / Thoát nhanh ra màn hình đăng nhập (Super + Shift + E hoặc Ctrl + Alt + Del)
