@@ -131,6 +131,9 @@ hl.bind(mainMod .. " + CTRL + W", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-w
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-theme"), { description = "Toggle Dark/Light Mode" })
 hl.bind(mainMod .. " + CTRL + B", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-statusbar"), { description = "Toggle Status Bar" })
 hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd("ml4w-powermenu toggle"), { description = "Power Menu" })
+-- Logout / Thoát nhanh ra màn hình đăng nhập (Super + Shift + E hoặc Ctrl + Alt + Del)
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("hyprctl dispatch exit"), { description = "Logout Hyprland" })
+hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd("ml4w-powermenu toggle"), { description = "Power Menu / Logout" })
 
 -- Phím Volume & Brightness trên bàn phím Laptop
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true, description = "Volume Up" })
