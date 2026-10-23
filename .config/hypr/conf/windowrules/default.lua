@@ -47,5 +47,4 @@ hl.window_rule({
     float = true,
 })
 
--- Hiệu ứng đóng mở tức thì cho Rofi Launcher
-hl.layer_rule({ match = { namespace = "rofi" }, noanim = false })
+
