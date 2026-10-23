@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-# Win + I: Mở Menu Cài đặt hệ thống
-~/.config/hypr/scripts/open-settings-menu.sh
+# Win + I: Mở Trung tâm Cài đặt hệ thống (KDE-style GUI Settings)
+exec python3 "$HOME/.config/hypr/scripts/hypr-settings.py"

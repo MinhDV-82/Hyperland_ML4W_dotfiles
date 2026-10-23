@@ -12,29 +12,96 @@ apply_mode() {
     case "$mode" in
         "laptop")
             # Chỉ màn Laptop
-            hyprctl eval "hl.monitor({ output = '$HDMI', disabled = true })"
-            hyprctl eval "hl.monitor({ output = '$LAPTOP', mode = 'preferred', position = '0x0', scale = 1, disabled = false })"
+            hyprctl keyword monitor "$HDMI,disable" 2>/dev/null || true
+            hyprctl keyword monitor "$LAPTOP,1920x1080@144,0x0,1" 2>/dev/null || true
+            echo "monitor=$LAPTOP,1920x1080@144,0x0,1" > ~/.config/hypr/monitors.conf
+            echo "monitor=$HDMI,disable" >> ~/.config/hypr/monitors.conf
+            cat << 'EOF' > ~/.config/hypr/monitors.lua
+hl.monitor({
+    output = "eDP-1",
+    mode = "1920x1080@144",
+    position = "0x0",
+    scale = 1,
+    disabled = false
+})
+hl.monitor({
+    output = "HDMI-A-1",
+    disabled = true
+})
+EOF
             echo "laptop" > "$STATE_FILE"
             notify-send "🖥️ Display Mode" "💻 Chỉ màn hình Laptop ($LAPTOP)" -i video-display -t 2500 2>/dev/null || true
             ;;
         "hdmi")
             # Chỉ màn HDMI (LG UltraGear)
-            hyprctl eval "hl.monitor({ output = '$LAPTOP', disabled = true })"
-            hyprctl eval "hl.monitor({ output = '$HDMI', mode = 'preferred', position = '0x0', scale = 1, disabled = false })"
+            hyprctl keyword monitor "$LAPTOP,disable" 2>/dev/null || true
+            hyprctl keyword monitor "$HDMI,1920x1080@144,0x0,1" 2>/dev/null || true
+            echo "monitor=$HDMI,1920x1080@144,0x0,1" > ~/.config/hypr/monitors.conf
+            echo "monitor=$LAPTOP,disable" >> ~/.config/hypr/monitors.conf
+            cat << 'EOF' > ~/.config/hypr/monitors.lua
+hl.monitor({
+    output = "HDMI-A-1",
+    mode = "1920x1080@144",
+    position = "0x0",
+    scale = 1,
+    disabled = false
+})
+hl.monitor({
+    output = "eDP-1",
+    disabled = true
+})
+EOF
             echo "hdmi" > "$STATE_FILE"
             notify-send "🖥️ Display Mode" "🖥️ Chỉ màn hình Ngoài ($HDMI)" -i video-display -t 2500 2>/dev/null || true
             ;;
         "mirror")
             # Nhân đôi (Mirror)
-            hyprctl eval "hl.monitor({ output = '$LAPTOP', mode = '1920x1080@144', position = '0x0', scale = 1, disabled = false })"
-            hyprctl eval "hl.monitor({ output = '$HDMI', mode = '1920x1080@144', position = '0x0', scale = 1, mirror = '$LAPTOP', disabled = false })"
+            hyprctl keyword monitor "$LAPTOP,1920x1080@144,0x0,1" 2>/dev/null || true
+            hyprctl keyword monitor "$HDMI,1920x1080@144,0x0,1,mirror,$LAPTOP" 2>/dev/null || true
+            echo "monitor=$LAPTOP,1920x1080@144,0x0,1" > ~/.config/hypr/monitors.conf
+            echo "monitor=$HDMI,1920x1080@144,0x0,1,mirror,$LAPTOP" >> ~/.config/hypr/monitors.conf
+            cat << 'EOF' > ~/.config/hypr/monitors.lua
+hl.monitor({
+    output = "eDP-1",
+    mode = "1920x1080@144",
+    position = "0x0",
+    scale = 1,
+    disabled = false
+})
+hl.monitor({
+    output = "HDMI-A-1",
+    mode = "1920x1080@144",
+    position = "0x0",
+    scale = 1,
+    mirror = "eDP-1",
+    disabled = false
+})
+EOF
             echo "mirror" > "$STATE_FILE"
             notify-send "🖥️ Display Mode" "👥 Nhân đôi màn hình (Mirror)" -i video-display -t 2500 2>/dev/null || true
             ;;
         "extend"|*)
             # Mở rộng (Cả 2 màn hình)
-            hyprctl eval "hl.monitor({ output = '$LAPTOP', mode = 'preferred', position = '0x0', scale = 1, disabled = false })"
-            hyprctl eval "hl.monitor({ output = '$HDMI', mode = 'preferred', position = '1920x0', scale = 1, disabled = false })"
+            hyprctl keyword monitor "$LAPTOP,1920x1080@144,0x0,1" 2>/dev/null || true
+            hyprctl keyword monitor "$HDMI,1920x1080@144,1920x0,1" 2>/dev/null || true
+            echo "monitor=$LAPTOP,1920x1080@144,0x0,1" > ~/.config/hypr/monitors.conf
+            echo "monitor=$HDMI,1920x1080@144,1920x0,1" >> ~/.config/hypr/monitors.conf
+            cat << 'EOF' > ~/.config/hypr/monitors.lua
+hl.monitor({
+    output = "eDP-1",
+    mode = "1920x1080@144",
+    position = "0x0",
+    scale = 1,
+    disabled = false
+})
+hl.monitor({
+    output = "HDMI-A-1",
+    mode = "1920x1080@144",
+    position = "1920x0",
+    scale = 1,
+    disabled = false
+})
+EOF
             echo "extend" > "$STATE_FILE"
             notify-send "🖥️ Display Mode" "🖥️➕💻 Mở rộng cả 2 màn hình (Extend)" -i video-display -t 2500 2>/dev/null || true
             ;;

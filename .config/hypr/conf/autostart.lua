@@ -20,7 +20,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("awww-daemon")
 
     -- Load cursor
-    hl.exec_cmd("hyprctl setcursor Breeze_Light 24")
+    hl.exec_cmd("hyprctl setcursor WhiteSur-cursors 24")
 
     -- Start listeners
     hl.exec_cmd("~/.config/ml4w/listeners.sh --startall")
@@ -68,4 +68,7 @@ hl.on("hyprland.start", function ()
 
     -- Vietnamese input method (fcitx5 + Unikey)
     hl.exec_cmd("pkill fcitx5; sleep 0.5 && fcitx5 -d --replace")
+
+    -- Load Night Light preference
+    hl.exec_cmd("~/.config/hypr/scripts/load-nightlight.sh")
 end)

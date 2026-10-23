@@ -30,8 +30,16 @@ hl.window_rule({
 -- Mặc định mở một số ứng dụng tiện ích dạng nổi
 hl.window_rule({
     name = "utility-floating",
-    match = { class = "org.kde.kcalc|pavucontrol|blueman-manager|nwg-look" },
+    match = { class = "org.kde.kcalc|pavucontrol|blueman-manager|nwg-look|org.hyprland.systemsettings" },
     float = true,
+})
+
+hl.window_rule({
+    name = "hypr-settings-size",
+    match = { class = "org.hyprland.systemsettings" },
+    float = true,
+    size = "940 700",
+    center = true,
 })
 
 -- Luật cửa sổ nổi riêng cho tất cả máy ảo Android (Android Studio Emulator, Waydroid, Genymotion, Scrcpy)
