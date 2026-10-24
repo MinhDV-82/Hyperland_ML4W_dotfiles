@@ -281,7 +281,7 @@ Scope {
                 text: r.title
                 elide: Text.ElideRight
                 color: r.t.text
-                font.family: root.fontForWeight(font.weight, r.t.fam)
+                font.family: (r.t.fam)
                 font.pixelSize: 13
             }
             Text {
@@ -290,7 +290,7 @@ Scope {
                 text: r.subtitle
                 wrapMode: Text.WordWrap
                 color: r.t.text2
-                font.family: root.fontForWeight(font.weight, r.t.fam)
+                font.family: (r.t.fam)
                 font.pixelSize: 12
             }
         }
@@ -313,7 +313,7 @@ Scope {
         topPadding: header ? 8 : 0
         wrapMode: Text.WordWrap
         color: t.text2
-        font.family: root.fontForWeight(font.weight, t.fam)
+        font.family: (t.fam)
         font.pixelSize: header ? 12 : 12
         font.weight: header ? Font.DemiBold : Font.Normal
     }
@@ -423,7 +423,7 @@ Scope {
             anchors.centerIn: parent
             text: b.text
             color: b.destructive ? b.t.danger : b.t.text
-            font.family: root.fontForWeight(font.weight, b.t.fam)
+            font.family: (b.t.fam)
             font.pixelSize: 13
         }
         MouseArea { id: ma; anchors.fill: parent; onClicked: b.clicked() }
@@ -499,7 +499,7 @@ Scope {
             anchors.horizontalCenter: parent.horizontalCenter
             text: I18n.tr(tile.label)
             color: tile.t.text
-            font.family: root.fontForWeight(font.weight, tile.t.fam)
+            font.family: (tile.t.fam)
             font.pixelSize: 12
         }
         MouseArea { anchors.fill: parent; onClicked: tile.clicked() }
@@ -611,7 +611,7 @@ Scope {
                     anchors.centerIn: parent
                     text: "i"
                     color: "white"
-                    font.family: Fonts.forWeight(font.weight, gl.fam); font.pixelSize: 10
+                    font.family: (gl.fam); font.pixelSize: 10
                     font.bold: true
                 }
             }
@@ -890,7 +890,7 @@ Scope {
                         wrapMode: Text.WordWrap
                         text: I18n.tr("A new version of MacShell is available.")
                         color: pal.text2
-                        font.family: root.fontForWeight(font.weight, pal.fam)
+                        font.family: (pal.fam)
                         font.pixelSize: 13
                     }
                     Row {
@@ -1171,7 +1171,7 @@ Scope {
                         selectByMouse: true
                         color: pal.text
                         selectionColor: pal.accent
-                        font.family: root.fontForWeight(font.weight, pal.fam)
+                        font.family: (pal.fam)
                         font.pixelSize: 13
                         onTextChanged: prefsWindow.query = text
                     }
@@ -1181,7 +1181,7 @@ Scope {
                         visible: searchInput.text === ""
                         text: I18n.tr("Search")
                         color: pal.text3
-                        font.family: root.fontForWeight(font.weight, pal.fam)
+                        font.family: (pal.fam)
                         font.pixelSize: 13
                     }
                     Rectangle {   // clear button
@@ -1196,7 +1196,7 @@ Scope {
                             anchors.verticalCenterOffset: -0.5
                             text: "\u00D7"
                             color: pal.sidebar
-                            font.family: Fonts.forWeight(font.weight, pal.fam); font.pixelSize: 12
+                            font.family: (pal.fam); font.pixelSize: 12
                             font.bold: true
                         }
                         MouseArea { anchors.fill: parent; onClicked: searchInput.text = "" }
@@ -1223,8 +1223,8 @@ Scope {
                     }
                     Column {
                         x: 52; anchors.verticalCenter: parent.verticalCenter
-                        Text { text: root.userName; color: prefsWindow.cur === acct.idx && prefsWindow.active ? "white" : pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
-                        Text { text: I18n.tr("Local Account"); color: prefsWindow.cur === acct.idx && prefsWindow.active ? Qt.rgba(1, 1, 1, 0.8) : pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 11 }
+                        Text { text: root.userName; color: prefsWindow.cur === acct.idx && prefsWindow.active ? "white" : pal.text; font.family: (pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
+                        Text { text: I18n.tr("Local Account"); color: prefsWindow.cur === acct.idx && prefsWindow.active ? Qt.rgba(1, 1, 1, 0.8) : pal.text2; font.family: (pal.fam); font.pixelSize: 11 }
                     }
                     MouseArea { id: acctMa; anchors.fill: parent; hoverEnabled: true; onClicked: prefsWindow.go(acct.idx) }
                 }
@@ -1299,7 +1299,7 @@ Scope {
                                 anchors.verticalCenter: parent.verticalCenter
                                 text: I18n.tr(navRow.p.name)
                                 color: (navRow.sel && prefsWindow.active) ? "white" : pal.text
-                                font.family: root.fontForWeight(font.weight, pal.fam)
+                                font.family: (pal.fam)
                                 font.pixelSize: 14
                             }
                             MouseArea {
@@ -1319,7 +1319,7 @@ Scope {
                         horizontalAlignment: Text.AlignHCenter
                         text: I18n.tr("No Results")
                         color: pal.text2
-                        font.family: root.fontForWeight(font.weight, pal.fam)
+                        font.family: (pal.fam)
                         font.pixelSize: 12
                     }
                 }
@@ -1380,7 +1380,7 @@ Scope {
                                 anchors.centerIn: parent
                                 anchors.verticalCenterOffset: -2
                                 text: navBtn.modelData.g
-                                font.family: Fonts.forWeight(font.weight, pal.fam); font.pixelSize: 28
+                                font.family: (pal.fam); font.pixelSize: 28
                                 color: navBtn.ok ? pal.text : pal.text3
                                 opacity: navBtn.ok ? 1 : 0.5
                                 scale: (navBtn.ok && navMa.pressed) ? 0.86 : 1
@@ -1404,7 +1404,7 @@ Scope {
                     anchors.verticalCenter: parent.verticalCenter
                     text: I18n.tr(prefsWindow.panes[prefsWindow.cur].name)
                     color: pal.text
-                    font.family: root.fontForWeight(font.weight, pal.fam)
+                    font.family: (pal.fam)
                     font.pixelSize: 15
                     font.weight: Font.DemiBold
                 }
@@ -1680,7 +1680,7 @@ Scope {
                                     selectByMouse: true
                                     color: pal.text
                                     selectionColor: pal.accent
-                                    font.family: root.fontForWeight(font.weight, pal.fam)
+                                    font.family: (pal.fam)
                                     font.pixelSize: 12
                                     text: root.bar ? root.bar.barCustomLogoPath : ""
                                     onTextEdited: { if (root.bar) root.bar.barCustomLogoPath = text; }
@@ -1698,7 +1698,7 @@ Scope {
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: "~/Pictures/logo.png"
                                     color: pal.text3
-                                    font.family: root.fontForWeight(font.weight, pal.fam)
+                                    font.family: (pal.fam)
                                     font.pixelSize: 12
                                 }
                             }
@@ -1914,7 +1914,7 @@ Scope {
                                     selectByMouse: true
                                     color: pal.text
                                     selectionColor: pal.accent
-                                    font.family: root.fontForWeight(font.weight, pal.fam)
+                                    font.family: (pal.fam)
                                     font.pixelSize: 12
                                     text: root.bar ? root.bar.screenshotDir : ""
                                     onTextEdited: { if (root.bar) root.bar.screenshotDir = text; }
@@ -1925,7 +1925,7 @@ Scope {
                                     anchors.verticalCenter: parent.verticalCenter
                                     text: "~/Pictures/Screenshots"
                                     color: pal.text3
-                                    font.family: root.fontForWeight(font.weight, pal.fam)
+                                    font.family: (pal.fam)
                                     font.pixelSize: 12
                                 }
                             }
@@ -2153,7 +2153,7 @@ Scope {
                                     maximumLength: 7
                                     color: pal.text
                                     selectionColor: pal.accent
-                                    font.family: root.fontForWeight(font.weight, pal.fam)
+                                    font.family: (pal.fam)
                                     font.pixelSize: 12
                                     text: root.iconTintColor
                                     onEditingFinished: { if (/^#[0-9a-fA-F]{6}$/.test(text)) root.iconTintColor = text.toLowerCase(); else text = root.iconTintColor; }
@@ -2726,7 +2726,7 @@ Scope {
                                 width: 120; height: 10; radius: 5; color: pal.track; anchors.verticalCenter: parent.verticalCenter
                                 Rectangle { width: parent.width * batPane.pct / 100; height: parent.height; radius: 5; color: batPane.pct <= 20 && !batPane.charging ? "#FF453A" : "#30D158" }
                             }
-                            Text { text: batPane.pct + "%"; color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; anchors.verticalCenter: parent.verticalCenter }
+                            Text { text: batPane.pct + "%"; color: pal.text; font.family: (pal.fam); font.pixelSize: 13; anchors.verticalCenter: parent.verticalCenter }
                         }
                     }
                     SRow {
@@ -2900,8 +2900,8 @@ Scope {
                                     id: nameCol
                                     width: parent.width - badge.width - 12
                                     spacing: 2
-                                    Text { width: parent.width; text: addRow.modelData.name; elide: Text.ElideRight; color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
-                                    Text { width: parent.width; text: addRow.modelData.hint; wrapMode: Text.WordWrap; color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 12 }
+                                    Text { width: parent.width; text: addRow.modelData.name; elide: Text.ElideRight; color: pal.text; font.family: (pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
+                                    Text { width: parent.width; text: addRow.modelData.hint; wrapMode: Text.WordWrap; color: pal.text2; font.family: (pal.fam); font.pixelSize: 12 }
                                 }
                                 Row {
                                     id: badge
@@ -2912,7 +2912,7 @@ Scope {
                                     Text {
                                         anchors.verticalCenter: parent.verticalCenter
                                         text: addRow.onDesktop + I18n.tr(" on desktop")
-                                        color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 12
+                                        color: pal.text2; font.family: (pal.fam); font.pixelSize: 12
                                     }
                                     SButton { t: pal; text: "\u2212"; onClicked: wgPane.removeOne(addRow.modelData.type) }
                                 }
@@ -3042,7 +3042,7 @@ Scope {
                                 selectByMouse: true
                                 color: pal.text
                                 selectionColor: pal.accent
-                                font.family: root.fontForWeight(font.weight, pal.fam)
+                                font.family: (pal.fam)
                                 font.pixelSize: 12
                                 text: wgPane.wdg ? wgPane.wdg.cityName : ""
                                 onEditingFinished: { if (wgPane.wdg) wgPane.wdg.cityName = text; }
@@ -3097,7 +3097,7 @@ Scope {
                         x: 14; anchors.verticalCenter: parent.verticalCenter
                         width: parent.width - 220; wrapMode: Text.WordWrap
                         text: I18n.tr("Keep these display settings? Reverting in ") + root.revertLeft + " s."
-                        color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold
+                        color: pal.text; font.family: (pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold
                     }
                     Row {
                         anchors.right: parent.right; anchors.rightMargin: 12; anchors.verticalCenter: parent.verticalCenter
@@ -3382,7 +3382,7 @@ Scope {
                                         Text {
                                             anchors.centerIn: parent
                                             text: "9:41"
-                                            font.family: Fonts.forWeight(font.weight, tile.modelData.fam); font.pixelSize: tile.modelData.tall ? 40 : 30
+                                            font.family: (tile.modelData.fam); font.pixelSize: tile.modelData.tall ? 40 : 30
                                             font.weight: Math.max(100, Math.min(900, tile.modelData.w))
                                             font.variableAxes: ({ "wght": tile.modelData.w })
                                             color: tile.modelData.liquid ? Qt.rgba(1, 1, 1, 0.22) : Qt.rgba(1, 1, 1, 0.78)
@@ -3391,7 +3391,7 @@ Scope {
                                         }
                                         MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: if (root.bar) root.bar.applyLockClockPreset(tile.modelData.id) }
                                     }
-                                    Text { anchors.horizontalCenter: parent.horizontalCenter; text: I18n.tr(tile.modelData.name); color: tile.sel ? pal.accent : pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 12; font.weight: tile.sel ? Font.DemiBold : Font.Normal }
+                                    Text { anchors.horizontalCenter: parent.horizontalCenter; text: I18n.tr(tile.modelData.name); color: tile.sel ? pal.accent : pal.text; font.family: (pal.fam); font.pixelSize: 12; font.weight: tile.sel ? Font.DemiBold : Font.Normal }
                                 }
                             }
                         }
@@ -3499,13 +3499,13 @@ Scope {
                             layer.enabled: true; layer.effect: MultiEffect { maskEnabled: true; maskSource: upMask; maskThresholdMin: 0.5; maskSpreadAtMin: 1.0 }
                         }
                     }
-                    Text { anchors.top: upic.bottom; anchors.topMargin: 8; anchors.horizontalCenter: parent.horizontalCenter; text: root.userName; color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 17; font.weight: Font.DemiBold }
+                    Text { anchors.top: upic.bottom; anchors.topMargin: 8; anchors.horizontalCenter: parent.horizontalCenter; text: root.userName; color: pal.text; font.family: (pal.fam); font.pixelSize: 17; font.weight: Font.DemiBold }
                 }
                 SCard {
                     t: pal
-                    SRow { t: pal; title: I18n.tr("Full name"); Text { text: root.userName; color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13 } }
-                    SRow { t: pal; title: I18n.tr("Account name"); Text { text: Quickshell.env("USER"); color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13 } }
-                    SRow { t: pal; title: I18n.tr("Home folder"); Text { text: Quickshell.env("HOME"); color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13 } }
+                    SRow { t: pal; title: I18n.tr("Full name"); Text { text: root.userName; color: pal.text2; font.family: (pal.fam); font.pixelSize: 13 } }
+                    SRow { t: pal; title: I18n.tr("Account name"); Text { text: Quickshell.env("USER"); color: pal.text2; font.family: (pal.fam); font.pixelSize: 13 } }
+                    SRow { t: pal; title: I18n.tr("Home folder"); Text { text: Quickshell.env("HOME"); color: pal.text2; font.family: (pal.fam); font.pixelSize: 13 } }
                     SRow {
                         t: pal; title: I18n.tr("Picture")
                         subtitle: I18n.tr("Used on the lock screen and here")
@@ -3663,18 +3663,18 @@ Scope {
                             Text {
                                 width: parent.width; elide: Text.ElideRight
                                 text: wpPane.curPath !== "" ? wpPane.nameOf(wpPane.curPath) : I18n.tr("No wallpaper")
-                                color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 15; font.weight: Font.DemiBold
+                                color: pal.text; font.family: (pal.fam); font.pixelSize: 15; font.weight: Font.DemiBold
                             }
                             Text {
                                 width: parent.width
                                 text: wpPane.curVideo !== "" ? I18n.tr("Animated wallpaper") : I18n.tr("Picture")
-                                color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 12
+                                color: pal.text2; font.family: (pal.fam); font.pixelSize: 12
                             }
                             Text {
                                 width: parent.width; wrapMode: Text.WordWrap
                                 visible: wpPane.curVideo !== ""
                                 text: I18n.tr("Plays on every display and pauses behind fullscreen windows. The Liquid Glass and the lock screen use it too.")
-                                color: pal.text3; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 11
+                                color: pal.text3; font.family: (pal.fam); font.pixelSize: 11
                             }
                             Row {
                                 spacing: 8
@@ -3753,7 +3753,7 @@ Scope {
                             anchors.verticalCenter: parent.verticalCenter
                             text: "⌕"
                             color: pal.text3
-                            font.family: Fonts.forWeight(font.weight, pal.fam); font.pixelSize: 19
+                            font.family: (pal.fam); font.pixelSize: 19
                         }
                         Item {
                             width: parent.width - 52
@@ -3764,7 +3764,7 @@ Scope {
                                 verticalAlignment: TextInput.AlignVCenter
                                 color: pal.text
                                 selectionColor: pal.accent
-                                font.family: root.fontForWeight(font.weight, pal.fam)
+                                font.family: (pal.fam)
                                 font.pixelSize: 12
                                 clip: true
                                 selectByMouse: true
@@ -3775,7 +3775,7 @@ Scope {
                                 verticalAlignment: Text.AlignVCenter
                                 text: I18n.tr("Search wallpapers")
                                 color: pal.text3
-                                font.family: root.fontForWeight(font.weight, pal.fam)
+                                font.family: (pal.fam)
                                 font.pixelSize: 12
                                 visible: wpSearchInput.text === "" && !wpSearchInput.activeFocus
                                 MouseArea { anchors.fill: parent; onClicked: wpSearchInput.forceActiveFocus() }
@@ -3786,7 +3786,7 @@ Scope {
                             visible: wpSearchInput.text !== ""
                             text: "×"
                             color: pal.text2
-                            font.family: Fonts.forWeight(font.weight, pal.fam); font.pixelSize: 18
+                            font.family: (pal.fam); font.pixelSize: 18
                             MouseArea {
                                 anchors.fill: parent
                                 anchors.margins: -6
@@ -3868,7 +3868,7 @@ Scope {
                                             id: wtBadge
                                             anchors.centerIn: parent
                                             text: I18n.tr("\u25B6  Animated")
-                                            color: "white"; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 9; font.weight: Font.DemiBold
+                                            color: "white"; font.family: (pal.fam); font.pixelSize: 9; font.weight: Font.DemiBold
                                         }
                                     }
                                 }
@@ -3896,7 +3896,7 @@ Scope {
                                             anchors.centerIn: parent
                                             text: wt.modelData.fav ? "★" : "☆"
                                             color: wt.modelData.fav ? "#ffd60a" : "white"
-                                            font.family: Fonts.forWeight(font.weight, pal.fam); font.pixelSize: 16
+                                            font.family: (pal.fam); font.pixelSize: 16
                                         }
                                         MouseArea {
                                             id: wtFavMa
@@ -3914,7 +3914,7 @@ Scope {
                                 elide: Text.ElideMiddle
                                 text: wt.modelData.name
                                 color: wt.cur ? pal.text : pal.text2
-                                font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 11
+                                font.family: (pal.fam); font.pixelSize: 11
                             }
                     }
                 }
@@ -3957,7 +3957,7 @@ Scope {
                             horizontalAlignment: Text.AlignHCenter
                             text: "macshell"
                             color: pal.text
-                            font.family: root.fontForWeight(font.weight, pal.fam)
+                            font.family: (pal.fam)
                             font.pixelSize: 21
                             font.weight: Font.DemiBold
                         }
@@ -3967,7 +3967,7 @@ Scope {
                             horizontalAlignment: Text.AlignHCenter
                             text: I18n.tr("Version 0.3.9 \u2022 Hyprland \u2022 Quickshell")
                             color: pal.text2
-                            font.family: root.fontForWeight(font.weight, pal.fam)
+                            font.family: (pal.fam)
                             font.pixelSize: 12
                         }
                     }
@@ -3981,7 +3981,7 @@ Scope {
                         Text {
                             text: "~/.config/macdock"
                             color: pal.text2
-                            font.family: root.fontForWeight(font.weight, pal.fam)
+                            font.family: (pal.fam)
                             font.pixelSize: 13
                         }
                     }
@@ -4066,13 +4066,13 @@ Scope {
                                 x: 70; anchors.verticalCenter: parent.verticalCenter
                                 width: parent.width - 70 - 90
                                 spacing: 2
-                                Text { text: cr.modelData.name; color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
-                                Text { width: parent.width; text: I18n.tr(cr.modelData.role); wrapMode: Text.WordWrap; color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 11 }
+                                Text { text: cr.modelData.name; color: pal.text; font.family: (pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
+                                Text { width: parent.width; text: I18n.tr(cr.modelData.role); wrapMode: Text.WordWrap; color: pal.text2; font.family: (pal.fam); font.pixelSize: 11 }
                             }
                             Text {
                                 anchors.right: parent.right; anchors.rightMargin: 14; anchors.verticalCenter: parent.verticalCenter
                                 text: "@" + cr.modelData.gh
-                                color: pal.accent; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 12
+                                color: pal.accent; font.family: (pal.fam); font.pixelSize: 12
                                 font.underline: crMa.containsMouse
                                 MouseArea { id: crMa; anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor; onClicked: Quickshell.execDetached(["xdg-open", "https://github.com/" + cr.modelData.gh]) }
                             }
@@ -4084,7 +4084,7 @@ Scope {
                     horizontalAlignment: Text.AlignHCenter
                     topPadding: 4
                     text: I18n.tr("Designed by Apple in California.\nRebuilt on Linux by two people who could not afford the Mac.")
-                    color: pal.text3; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 11
+                    color: pal.text3; font.family: (pal.fam); font.pixelSize: 11
                 }
 
                 // (keep scrolling…)
@@ -4104,18 +4104,18 @@ Scope {
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter; y: 64
                             text: I18n.tr("Protect your MacShell with AppleCare+")
-                            color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 17; font.weight: Font.DemiBold
+                            color: pal.text; font.family: (pal.fam); font.pixelSize: 17; font.weight: Font.DemiBold
                         }
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter; y: 90
                             width: parent.width - 60; horizontalAlignment: Text.AlignHCenter; wrapMode: Text.WordWrap
                             text: I18n.tr("Unlimited repairs for accidental damage, 24/7 priority access to Apple experts, and battery service coverage. Same price as for a MacBook Pro.")
-                            color: pal.text2; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 12
+                            color: pal.text2; font.family: (pal.fam); font.pixelSize: 12
                         }
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter; y: 136
                             text: I18n.tr("$279.00 for 3 years or $99.99/yr.")
-                            color: pal.text; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; font.weight: Font.Medium
+                            color: pal.text; font.family: (pal.fam); font.pixelSize: 13; font.weight: Font.Medium
                         }
                         Rectangle {
                             anchors.horizontalCenter: parent.horizontalCenter; y: 166
@@ -4123,7 +4123,7 @@ Scope {
                             color: careMa.pressed ? Qt.darker(pal.accent, 1.15) : pal.accent
                             scale: careMa.pressed ? 0.96 : 1
                             Behavior on scale { NumberAnimation { duration: 180; easing.type: Easing.OutQuint } }
-                            Text { anchors.centerIn: parent; text: I18n.tr("Add AppleCare+"); color: "white"; font.family: root.fontForWeight(font.weight, pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
+                            Text { anchors.centerIn: parent; text: I18n.tr("Add AppleCare+"); color: "white"; font.family: (pal.fam); font.pixelSize: 13; font.weight: Font.DemiBold }
                             MouseArea { id: careMa; anchors.fill: parent; cursorShape: Qt.PointingHandCursor }
                         }
                     }
@@ -5728,7 +5728,7 @@ Scope {
                                         text: cell.isSep ? "" : ((cell.modelData.kind === "win" && cell.modelData.tl && cell.modelData.tl.title) ? cell.modelData.tl.title : cell.modelData.name)
                                         color: "white"
                                         font.pixelSize: 13
-                                        font.family: root.fontForWeight(font.weight, root.fontFamily)
+                                        font.family: (root.fontFamily)
                                     }
                                 }
 
@@ -5859,7 +5859,7 @@ Scope {
                                     text: mi.isSep ? "" : (mi.armedNow ? I18n.tr("Click again to confirm") : I18n.tr(mi.modelData.label))
                                     color: mi.off ? Qt.rgba(1, 1, 1, 0.4) : "white"
                                     font.pixelSize: 13
-                                    font.family: root.fontForWeight(font.weight, root.fontFamily)
+                                    font.family: (root.fontFamily)
                                 }
                                 MouseArea {
                                     id: mia

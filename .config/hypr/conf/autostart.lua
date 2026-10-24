@@ -17,8 +17,8 @@ hl.on("hyprland.start", function ()
     -- Start polkit authentication agent
     hl.exec_cmd("systemctl --user start hyprpolkitagent.service 2>/dev/null || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 || true")
 
-    -- Restore wallpaper
-    hl.exec_cmd("awww restore 2>/dev/null || true")
+    -- Restore wallpaper or set default
+    hl.exec_cmd("awww restore 2>/dev/null || awww img ~/Pictures/Wallpapers/default.jpg 2>/dev/null || true")
 
     -- Load GTK settings
     hl.exec_cmd("~/.config/hypr/scripts/gtk.sh")
