@@ -34,10 +34,20 @@ terminate_clients() {
 
 		echo ":: PID $pid has terminated."
 	done
-	bash $home/.config/ml4w/listeners.sh --stopall
+	sleep 0.2
 }
 
-if [[ "$1" == "exit" ]]; then
+if [ -z "$1" ]; then
+    CHOICE=$(echo -e "🔒 Khóa màn hình (Lock)\n🚪 Đăng xuất (Logout)\n🔄 Khởi động lại (Reboot)\n⚡ Tắt máy (Shutdown)\n💤 Ngủ tạm (Suspend)" | rofi -dmenu -i -p "Nguồn điện:" 2>/dev/null)
+    case "$CHOICE" in
+        *Khóa*) exec sh ~/.config/quickshell/MacLock/lock-via-ipc.sh ;;
+        *Đăng\ xuất*) hyprctl dispatch exit ;;
+        *Khởi\ động*) systemctl reboot ;;
+        *Tắt\ máy*) systemctl poweroff ;;
+        *Ngủ*) systemctl suspend ;;
+    esac
+    exit 0
+fi
 	echo ":: Exit"
 	terminate_clients
 	sleep 0.5

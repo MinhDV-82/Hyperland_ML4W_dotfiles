@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# --- Check for hyprsysteminfo ---
-kitty --class dotfiles-floating -e $HOME/.config/hypr/scripts/systeminfo.sh

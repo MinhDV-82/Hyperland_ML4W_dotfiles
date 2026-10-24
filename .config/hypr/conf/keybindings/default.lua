@@ -8,22 +8,22 @@ local mainMod = "SUPER" -- Phím Windows / Super
 -- 1. MỞ ỨNG DỤNG (KDE Style)
 -- =====================================================
 -- Mở Dolphin (File Manager chuẩn KDE)
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("dolphin || ~/.config/ml4w/settings/filemanager"), { description = "Open File Manager (Dolphin)" })
--- Mở Settings (Win + I: Mở ML4W Settings / Cài đặt giao diện)
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("dolphin"), { description = "Open File Manager (Dolphin)" })
+-- Mở Settings (Win + I: Mở Cài đặt giao diện)
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("~/.config/hypr/scripts/open-settings.sh"), { description = "Open Settings (Win + I)" })
--- Mở Terminal (Super + Enter hoặc Ctrl + Alt + T giống thông lệ)
-hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("~/.config/ml4w/settings/terminal.sh"), { description = "Open Terminal" })
-hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd("~/.config/ml4w/settings/terminal.sh"), { description = "Open Terminal (Linux Standard)" })
+-- Mở Terminal (Super + Enter hoặc Ctrl + Alt + T)
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"), { description = "Open Terminal" })
+hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd("kitty"), { description = "Open Terminal (Linux Standard)" })
 -- Mở Browser
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/.config/ml4w/settings/browser.sh"), { description = "Open Browser" })
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("xdg-open https://"), { description = "Open Browser" })
 -- Mở Máy tính (Calculator)
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("~/.config/ml4w/settings/calculator.sh"), { description = "Open Calculator" })
--- App Launcher (Super riêng / Super + Space / Alt + F2 giống KRunner)
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-launcher"), { description = "Open App Launcher" })
-hl.bind("ALT + F2", hl.dsp.exec_cmd("krunner || ~/.config/ml4w/scripts/ml4w-launcher"), { description = "KRunner / App Launcher" })
-hl.bind(mainMod .. " + CTRL + RETURN", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-launcher"), { description = "Open App Launcher" })
--- Task Manager / System Monitor (Ctrl + Shift + Esc giống Windows/KDE)
-hl.bind("CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd("plasma-systemmonitor || btop || ~/.config/ml4w/settings/system-monitor.sh"), { description = "Task Manager / System Monitor" })
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("kcalc"), { description = "Open Calculator" })
+-- App Launcher & Spotlight
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs -c MacShell ipc call spotlight toggle"), { description = "MacShell Spotlight" })
+hl.bind("ALT + F2", hl.dsp.exec_cmd("krunner || qs -c MacShell ipc call spotlight toggle"), { description = "KRunner / Spotlight" })
+hl.bind(mainMod .. " + CTRL + RETURN", hl.dsp.exec_cmd("qs -c MacShell ipc call spotlight toggle"), { description = "Spotlight Launcher" })
+-- Task Manager / System Monitor (Ctrl + Shift + Esc)
+hl.bind("CTRL + SHIFT + ESCAPE", hl.dsp.exec_cmd("plasma-systemmonitor || btop"), { description = "Task Manager / System Monitor" })
 
 -- =====================================================
 -- 2. QUẢN LÝ CỬA SỔ (KDE & Windows Shortcuts)
@@ -66,13 +66,13 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }), { descript
 -- =====================================================
 -- 3. HỆ THỐNG, KHÓA MÁN HÌNH, CLIPBOARD
 -- =====================================================
--- Khóa màn hình: Super + L (Chuẩn Windows & KDE)
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-power -l"), { description = "Lock Screen (Win + L)" })
--- Clipboard History: Super + V (Chuẩn Windows 10/11 & KDE Klipper)
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-cliphist"), { description = "Clipboard History (Win + V)" })
--- Emoji Picker: Super + . hoặc Super + ; (Chuẩn Windows/KDE)
-hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("~/.config/ml4w/settings/emojipicker.sh"), { description = "Emoji Picker (Win + .)" })
-hl.bind(mainMod .. " + semicolon", hl.dsp.exec_cmd("~/.config/ml4w/settings/emojipicker.sh"), { description = "Emoji Picker (Win + ;)" })
+-- Khóa màn hình: Super + L (MacLock)
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("sh ~/.config/quickshell/MacLock/lock-via-ipc.sh"), { description = "Lock Screen (MacLock)" })
+-- Clipboard History: Super + V (Spotlight Clipboard)
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("qs -c MacShell ipc call spotlight clipboard"), { description = "Clipboard History (Win + V)" })
+-- Emoji Picker: Super + . hoặc Super + ; (Spotlight Emoji)
+hl.bind(mainMod .. " + period", hl.dsp.exec_cmd("qs -c MacShell ipc call spotlight emoji"), { description = "Emoji Picker (Win + .)" })
+hl.bind(mainMod .. " + semicolon", hl.dsp.exec_cmd("qs -c MacShell ipc call spotlight emoji"), { description = "Emoji Picker (Win + ;)" })
 
 -- Chụp màn hình (Screenshot): Chụp 1 chạm siêu nhanh, lưu & copy vào Clipboard
 hl.bind("PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/quick-screenshot.sh"), { description = "Quick Screenshot Area (PrintScreen)" })
@@ -122,20 +122,17 @@ end)
 hl.bind(mainMod .. " + R", hl.dsp.submap("resize"), { description = "Vào chế độ Resize" })
 
 -- =====================================================
--- 7. TIỆN ÍCH ML4W, STATUSBAR & MULTIMEDIA
+-- 7. TIỆN ÍCH MACSHELL, HỆ THỐNG & MULTIMEDIA
 -- =====================================================
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("qs -c MacShell ipc call settings toggle"), { description = "MacShell Settings" })
 hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd("~/.config/hypr/scripts/keybindings.sh"), { description = "Show keybindings list" })
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/loadconfig.sh"), { description = "Reload Hyprland Config" })
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-wallpaper-app --random"), { description = "Random Wallpaper" })
-hl.bind(mainMod .. " + CTRL + W", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-wallpaper-app"), { description = "Wallpaper Selector" })
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-theme"), { description = "Toggle Dark/Light Mode" })
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/restart-bars.sh"), { description = "Restart MacShell & Bars" })
+hl.bind(mainMod .. " + CTRL + W", hl.dsp.exec_cmd("qs -c MacShell ipc call wallpapers toggle"), { description = "Wallpaper Selector" })
 -- Lọc ánh sáng xanh (Night Light): Super + Shift + N
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle-nightlight.sh"), { description = "Toggle Night Light (Filter Blue Light)" })
-hl.bind(mainMod .. " + CTRL + B", hl.dsp.exec_cmd("~/.config/ml4w/scripts/ml4w-toggle-statusbar"), { description = "Toggle Status Bar" })
-hl.bind(mainMod .. " + CTRL + P", hl.dsp.exec_cmd("ml4w-powermenu toggle"), { description = "Power Menu" })
 -- Logout / Thoát nhanh ra màn hình đăng nhập (Super + Shift + E hoặc Ctrl + Alt + Del)
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("hyprctl dispatch exit"), { description = "Logout Hyprland" })
-hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd("ml4w-powermenu toggle"), { description = "Power Menu / Logout" })
+hl.bind("CTRL + ALT + DELETE", hl.dsp.exec_cmd("~/.config/hypr/scripts/power.sh"), { description = "Power Menu / Logout" })
 
 -- Phím Volume & Brightness trên bàn phím Laptop
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true, description = "Volume Up" })
