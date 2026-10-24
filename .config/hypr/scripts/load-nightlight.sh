@@ -16,3 +16,4 @@ if [ "$ENABLED" = "True" ]; then
     sleep 0.2
     hyprsunset -t "$TEMP" >/dev/null 2>&1 &
 fi
+

@@ -473,52 +473,26 @@ class SettingsWindow(Adw.PreferencesWindow):
         page.set_title("Thanh công cụ")
         page.set_icon_name("preferences-system-windows-symbolic")
 
-        # Statusbar
-        grp_bar = Adw.PreferencesGroup()
-        grp_bar.set_title("Thanh trạng thái trên (Quickshell Statusbar)")
-
-        sb_autohide = False
-        if os.path.exists(STATUSBAR_CONF):
-            try:
-                with open(STATUSBAR_CONF, "r") as f:
-                    sb_autohide = json.load(f).get("bar", {}).get("autohide", False)
-            except Exception:
-                pass
-
-        sw_sb = Adw.SwitchRow()
-        sw_sb.set_title("Tự động ẩn thanh trên (Autohide)")
-        sw_sb.set_subtitle("Ẩn thanh trạng thái khi có cửa sổ chạm tới")
-        sw_sb.set_active(sb_autohide)
-        sw_sb.connect("notify::active", lambda s, p: run_cmd("~/.config/ml4w/scripts/ml4w-toggle-statusbar-autohide"))
-        grp_bar.add(sw_sb)
-        page.add(grp_bar)
-
-        # Dock
-        grp_dock = Adw.PreferencesGroup()
-        grp_dock.set_title("Thanh Dock dưới (Quickshell Dock)")
-
-        dock_autohide = False
-        if os.path.exists(DOCK_CONF):
-            try:
-                with open(DOCK_CONF, "r") as f:
-                    dock_autohide = json.load(f).get("dock", {}).get("autohide", False)
-            except Exception:
-                pass
-
-        sw_dock = Adw.SwitchRow()
-        sw_dock.set_title("Tự động ẩn Dock dưới (Autohide)")
-        sw_dock.set_subtitle("Ẩn thanh ứng dụng bên dưới khi cửa sổ phóng to")
-        sw_dock.set_active(dock_autohide)
-        sw_dock.connect("notify::active", lambda s, p: run_cmd("~/.config/ml4w/scripts/ml4w-toggle-dock-autohide"))
-        grp_dock.add(sw_dock)
-        page.add(grp_dock)
+        # MacShell Settings
+        grp_mac = Adw.PreferencesGroup()
+        grp_mac.set_title("Giao diện macOS Tahoe (MacShell)")
+        grp_mac.set_description("Menu Bar trên, Liquid Glass Dock dưới, Control Center và Spotlight.")
+        row_mac = Adw.ActionRow()
+        row_mac.set_title("Cài đặt chi tiết MacShell (Win + Z)")
+        row_mac.set_subtitle("Chỉnh hiệu ứng kính Liquid Glass, độ phóng to Dock, tự động ẩn Menu Bar")
+        btn_mac = Gtk.Button(label="Mở cài đặt MacShell")
+        btn_mac.add_css_class("suggested-action")
+        btn_mac.connect("clicked", lambda b: run_cmd("qs -c MacShell ipc call settings toggle"))
+        row_mac.add_suffix(btn_mac)
+        grp_mac.add(row_mac)
+        page.add(grp_mac)
 
         # Restart Bars
         grp_restart = Adw.PreferencesGroup()
         grp_restart.set_title("Khởi động lại")
         row_restart = Adw.ActionRow()
         row_restart.set_title("🔄 Khởi động lại toàn bộ thanh giao diện")
-        row_restart.set_subtitle("Tải lại Quickshell Statusbar và Dock nếu gặp hiện tượng treo hoặc hiển thị sai")
+        row_restart.set_subtitle("Tải lại MacShell Menu Bar và Dock nếu gặp hiện tượng treo hoặc hiển thị sai")
         btn_restart = Gtk.Button(label="Khởi động lại")
         btn_restart.connect("clicked", lambda b: self.restart_bars())
         row_restart.add_suffix(btn_restart)
@@ -529,7 +503,7 @@ class SettingsWindow(Adw.PreferencesWindow):
 
     def restart_bars(self):
         run_cmd("~/.config/hypr/scripts/restart-bars.sh")
-        self.show_toast("Đã khởi động lại Statusbar & Dock!")
+        self.show_toast("Đã khởi động lại MacShell!")
 
     # -------------------------------------------------------------
     # TAB 6: Phím tắt hệ thống (Keybindings)
@@ -544,17 +518,22 @@ class SettingsWindow(Adw.PreferencesWindow):
         grp_keys.set_description("Danh sách các tổ hợp phím tắt nhanh trên hệ thống:")
 
         shortcuts = [
+            ("Win + Space", "🔍 Mở Spotlight Search (Tìm kiếm & Tính toán chuẩn macOS)"),
             ("Win + I", "⚙️ Mở Cài đặt hệ thống (Cửa sổ này)"),
-            ("Win + Return", "💻 Mở Terminal (Cửa sổ dòng lệnh)"),
+            ("Win + Z", "🛠️ Mở Cài đặt MacShell (Tùy biến Menu Bar & Dock Liquid Glass)"),
+            ("Win + V", "📋 Spotlight Lịch sử Khay nhớ tạm (Clipboard History)"),
+            ("Win + . (chấm)", "😀 Spotlight Chọn biểu tượng cảm xúc (Emoji Picker)"),
+            ("Alt + Tab", "🔀 Chuyển đổi qua lại giữa các ứng dụng chuẩn macOS"),
+            ("Win + L", "🔒 Khóa màn hình MacLock (Liquid Glass Lock Screen)"),
+            ("Ctrl + Alt + W", "🖼️ Mở Bộ chọn hình nền MacShell"),
+            ("Win + Return", "💻 Mở Terminal (Cửa sổ dòng lệnh Kitty)"),
             ("Win + E", "📁 Mở Quản lý tệp tin (File Manager)"),
             ("Win + B", "🌐 Mở Trình duyệt web"),
-            ("Win + D / Win + Space", "🚀 Mở Menu tìm kiếm ứng dụng (Rofi)"),
-            ("Win + Q", "❌ Đóng cửa sổ đang chọn"),
-            ("Win + F", "🔍 Bật / Tắt chế độ toàn màn hình (Fullscreen)"),
-            ("Win + Shift + Space", "📌 Thả nổi cửa sổ (Toggle Floating)"),
-            ("Win + V", "📋 Mở lịch sử Khay nhớ tạm (Clipboard History)"),
-            ("Win + P", "🖥️ Chuyển đổi nhanh chế độ màn hình"),
-            ("Win + Print", "📸 Chụp ảnh màn hình (Screenshot)"),
+            ("Win + Q / Alt + F4", "❌ Đóng cửa sổ đang chọn"),
+            ("Win + F / F11", "🔍 Bật / Tắt chế độ toàn màn hình (Fullscreen)"),
+            ("Win + M", "📐 Phóng to cực đại cửa sổ (Maximize)"),
+            ("Print", "📸 Chụp ảnh màn hình (Screenshot region)"),
+            ("Win + P", "🖥️ Chuyển đổi nhanh chế độ hiển thị màn hình"),
             ("Ctrl + Alt + Delete", "🚪 Menu Đăng xuất, Khởi động lại hoặc Tắt máy")
         ]
 
